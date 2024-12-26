@@ -1,0 +1,15 @@
+appName: "name-from-helm"
+
+namespace: default
+
+replicas: 1
+
+configMap: "my-image-configmap"
+
+message: "default"
+
+nodePort: 30000
+
+image:
+    name: my-image
+    tag: latest

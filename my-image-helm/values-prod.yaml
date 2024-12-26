@@ -1,0 +1,5 @@
+namespace: prod
+message: "prod"
+
+replicas: 5
+nodePort: 30002

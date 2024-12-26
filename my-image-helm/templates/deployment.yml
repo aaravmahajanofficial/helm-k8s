@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.appName}}
+  namespace: {{.Values.namespace}}
+  labels:
+    app: {{.Values.appName}}
+spec:
+  selector:
+    matchLabels:
+      app: {{.Values.appName}}
+  replicas: {{.Values.replicas}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.appName}}
+    spec:
+      containers:
+        - name: {{.Values.appName}}
+          image: "{{.Values.image.name}}:{{.Values.image.tag}}"
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+              name: {{.Values.appName}}
+          envFrom:
+            - configMapRef:
+                name: {{.Values.configMap}}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{.Values.appName}}-service"
+spec:
+  selector:
+    app: {{.Values.appName}}
+  type: NodePort
+  ports:
+    - name: "{{.Values.appName}}-service"
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: {{.Values.nodePort}}

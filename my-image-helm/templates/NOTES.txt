@@ -1,0 +1,1 @@
+helm upgrade --install my-image-helm-prod my-image-helm/ --values my-image-helm/values.yaml -f my-image-helm/values-prod.yaml -n prod

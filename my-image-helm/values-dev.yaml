@@ -1,0 +1,5 @@
+namespace: dev
+message: "dev"
+
+replicas: 2
+nodePort: 30001

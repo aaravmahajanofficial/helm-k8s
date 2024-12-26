@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{.Values.configMap}}
+  namespace: {{.Values.namespace}}
+data:
+  MESSAGE: {{.Values.message}}
+
+# After Helm finishes installing, values.yaml is gone, but your pods still need those configuration values
+# ConfigMap persists in your cluster as a Kubernetes resource
+# If your pod restarts, it can still get its configuration from the ConfigMap
+# You can update the ConfigMap without redeploying your application
+# Multiple pods can share the same ConfigMap
